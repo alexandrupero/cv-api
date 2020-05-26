@@ -11,3 +11,4 @@ services:
     volumes:
       - ~/.aspnet/https:/root/.aspnet/https:ro
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ~/Projects/cv-data:/cv-data:ro

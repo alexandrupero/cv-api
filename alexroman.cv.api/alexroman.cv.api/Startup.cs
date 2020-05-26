@@ -38,6 +38,9 @@ namespace alexroman.cv.api
             });
 
             services.AddJsonRpc();
+            services.AddLazyCache();
+
+            services.AddScoped<ICvDatabase, CvDatabase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace alexroman.cv.api
 {
@@ -37,7 +39,14 @@ namespace alexroman.cv.api
                 options.AllowSynchronousIO = true;
             });
 
-            services.AddJsonRpc();
+            services.AddJsonRpc(options =>
+                options.JsonSerializer = new JsonSerializer()
+                {
+                    ContractResolver = new DefaultContractResolver
+                    {
+                        NamingStrategy = new CamelCaseNamingStrategy()
+                    }
+            });
             services.AddLazyCache();
 
             services.AddScoped<ICvDatabase, CvDatabase>();
@@ -50,10 +59,12 @@ namespace alexroman.cv.api
             {
                 app.UseDeveloperExceptionPage();
             }
+            if (env.IsProduction())
+            {
+                app.UseCors(_allowSpecificOrigins);
+            }
 
             app.UseJsonRpc();
-
-            app.UseCors(_allowSpecificOrigins);
         }
     }
 }

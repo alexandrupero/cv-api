@@ -14,7 +14,10 @@
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Models\" />
-    <Folder Include="cv-data\" />
     <Folder Include="Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="system.describe" />
+    <Content Remove="system.describe.json" />
   </ItemGroup>
 </Project>

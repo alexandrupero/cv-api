@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Anemonis.AspNetCore.JsonRpc;
 using Microsoft.Extensions.Configuration;
@@ -34,8 +32,33 @@ namespace alexroman.cv.api
                     },
                     new Proc
                     {
-                        Name = "search-languages",
-                        Params = new string[] { "search_term" }
+                        Name = "frameworks",
+                        Params = new string[]{ }
+                    },
+                    new Proc
+                    {
+                        Name = "tools",
+                        Params = new string[]{ }
+                    },
+                    new Proc
+                    {
+                        Name = "open-source-projects",
+                        Params = new string[]{ }
+                    },
+                    new Proc
+                    {
+                        Name = "experience",
+                        Params = new string[]{ }
+                    },
+                    new Proc
+                    {
+                        Name = "contact",
+                        Params = new string[]{ }
+                    },
+                    new Proc
+                    {
+                        Name = "search",
+                        Params = new string[] { "keyword" }
                     }
                 }
             };
@@ -43,17 +66,17 @@ namespace alexroman.cv.api
             return Task.FromResult(systemDescribe);
         }
 
-        [JsonRpcMethod("search-languages", 0)]
-        public async Task<IEnumerable<string>> SearchLanguagesAsync(string search_term)
+        [JsonRpcMethod("search", 0)]
+        public async Task<IEnumerable<SearchResult>> SearchAsync(string keyword)
         {
-            if (string.IsNullOrWhiteSpace(search_term) || search_term.Length < 3)
+            if (string.IsNullOrWhiteSpace(keyword) || keyword.Length < 2)
             {
-                throw new JsonRpcServiceException(100L, "Please enter at least 3 characters for \"search_term\".");
+                throw new JsonRpcServiceException(100L, $"Please enter at least 2 characters for {nameof(keyword)}.");
             }
 
             var cv = await _db.GetCvAsync();
 
-            return cv.Languages.Where(l => l.Name.Contains(search_term, StringComparison.OrdinalIgnoreCase)).Select(l => l.Name);
+            return cv.Search(keyword);
         }
 
         [JsonRpcMethod("languages")]
@@ -61,9 +84,47 @@ namespace alexroman.cv.api
         {
             var cv = await _db.GetCvAsync();
 
-            return cv.Languages.Select(l => l.Name);
+            return cv.Languages;
+        }
+
+        [JsonRpcMethod("frameworks")]
+        public async Task<IEnumerable<string>> GetFrameworksAsync()
+        {
+            var cv = await _db.GetCvAsync();
+
+            return cv.Frameworks;
+        }
+
+        [JsonRpcMethod("tools")]
+        public async Task<IEnumerable<string>> GetToolsAsync()
+        {
+            var cv = await _db.GetCvAsync();
+
+            return cv.Tools;
+        }
+
+        [JsonRpcMethod("open-source-projects")]
+        public async Task<IEnumerable<string>> GetOpenSourceProjectsAsync()
+        {
+            var cv = await _db.GetCvAsync();
+
+            return cv.OpenSourceProjects;
+        }
+
+        [JsonRpcMethod("experience")]
+        public async Task<IEnumerable<Experience>> GetExperienceAsync()
+        {
+            var cv = await _db.GetCvAsync();
+
+            return cv.Experience;
+        }
+
+        [JsonRpcMethod("contact")]
+        public async Task<string> GetContactAsync()
+        {
+            var cv = await _db.GetCvAsync();
+
+            return cv.Email;
         }
     }
-
-
 }

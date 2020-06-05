@@ -12,6 +12,7 @@ namespace alexroman.cv.api
     public class Startup
     {
         private readonly string _allowSpecificOrigins = nameof(_allowSpecificOrigins);
+        private readonly string _allowAllOrigins = nameof(_allowAllOrigins);
 
         public Startup(IConfiguration configuration)
         {
@@ -28,8 +29,18 @@ namespace alexroman.cv.api
                 options.AddPolicy(name: _allowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("https://alexroman.dev",
-                                            "https://www.alexroman.dev");
+                        builder
+                            .WithOrigins("https://alexroman.dev",
+                                            "https://www.alexroman.dev")
+                            .WithHeaders("Content-Type");
+                    });
+            });
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: _allowAllOrigins,
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                     });
             });
 
@@ -58,8 +69,9 @@ namespace alexroman.cv.api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors(_allowAllOrigins);
             }
-            if (env.IsProduction())
+            else
             {
                 app.UseCors(_allowSpecificOrigins);
             }

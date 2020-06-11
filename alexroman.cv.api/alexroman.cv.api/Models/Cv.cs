@@ -16,12 +16,12 @@ namespace alexroman.cv.api
         public IEnumerable<SearchResult> Search(string keyword)
         {
             var searchResult = new List<SearchResult>();
-            IEnumerable<SearchResult> search(IEnumerable<string> location, string locationName = "")
+            IEnumerable<SearchResult> search(IEnumerable<string> location, string path = "")
                 => location
                     .Where(value => value?.Contains(keyword, StringComparison.OrdinalIgnoreCase) ?? false)
                     ?.Select(result => new SearchResult
                     {
-                        Location = locationName,
+                        Path = path,
                         Result = result
                     }) ?? Enumerable.Empty<SearchResult>();
 
@@ -34,13 +34,13 @@ namespace alexroman.cv.api
             foreach (var exp in Experience)
             {
                 var experienceSearchResults = search(new[]
-                { exp.Company, exp.Position, exp.Location, exp.StartDate.ToString("m"), exp.EndDate?.ToString("m") });
+                { exp.Company, exp.Role, exp.Location, exp.StartDate.ToString("Y"), exp.EndDate?.ToString("Y") });
 
                 if (experienceSearchResults.Any())
                 {
                     searchResult.Add(new SearchResult
                     {
-                        Location = nameof(Experience),
+                        Path = nameof(Experience),
                         Result = exp
                     });
                 }

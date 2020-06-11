@@ -2,7 +2,7 @@
 {
     public class SearchResult
     {
-        public string Location { get; set; }
+        public string Path { get; set; }
         public object Result { get; set; }
     }
 }

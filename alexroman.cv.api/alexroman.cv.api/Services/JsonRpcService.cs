@@ -10,12 +10,10 @@ namespace alexroman.cv.api
     public class JsonRpcService : IJsonRpcService
     {
         private readonly ICvDatabase _db;
-        private readonly IConfiguration _configuration;
 
         public JsonRpcService(ICvDatabase db, IConfiguration configuration)
         {
             _db = db;
-            _configuration = configuration;
         }
 
         [JsonRpcMethod("system.describe")]

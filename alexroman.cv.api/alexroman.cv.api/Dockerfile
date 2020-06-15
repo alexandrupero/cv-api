@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
 WORKDIR /src
-COPY alexroman.cv.api/alexroman.cv.api.csproj alexroman.cv.api/
+COPY alexroman.cv.api.csproj alexroman.cv.api/
 RUN dotnet restore "alexroman.cv.api/alexroman.cv.api.csproj"
 COPY . .
 WORKDIR "/src/alexroman.cv.api"

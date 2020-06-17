@@ -43,7 +43,7 @@ jobs:
             docker-compose --file docker-compose.test.yml build
             docker-compose --file docker-compose.test.yml run sut
           else
-            docker build . --file ../../alexroman.cv.api/Dockerfile
+            docker build . --file alexroman.cv.api/Dockerfile
           fi
      
   # Build and push image to Docker Registry
@@ -62,9 +62,9 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Builds the docker image (path relative to this file)
+    # Builds the docker image (path relative to api root)
     - name: Build image
-      run: docker build . --file ../../alexroman.cv.api/Dockerfile --tag $IMAGE_NAME
+      run: docker build . --file alexroman.cv.api/Dockerfile --tag $IMAGE_NAME
 
     # Login to the docker registry using the default GITHUB_TOKEN environment variable and github.actor (The login of the user that initiated the workflow run)
     - name: Log into registry

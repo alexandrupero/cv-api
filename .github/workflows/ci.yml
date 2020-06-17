@@ -5,9 +5,11 @@ name: CI
 on:
   push:
     branches: [ master ]
+    
     # Publish `v1.2.3` tags as releases.
     tags:
       - v*
+
     # file paths to consider in the event. Optional; defaults to all.
     paths:
       - 'alexroman.cv.api/*'
@@ -15,6 +17,7 @@ on:
   # Run tests for PRs into master branch
   pull_request:
     branches: [ master ]
+    
     paths:
       - 'alexroman.cv.api/*'
 
@@ -44,9 +47,13 @@ jobs:
           fi
      
   # Build and push image to Docker Registry
-  build:
+  push:
+    # Ensure test job passes before pushing image.
+    needs: test
+    
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    
     # Only run this job for push events 
     if: github.event_name == 'push'
 

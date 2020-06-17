@@ -61,6 +61,8 @@ namespace alexroman.cv.api
             services.AddLazyCache();
 
             services.AddScoped<ICvDatabase, CvDatabase>();
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +77,13 @@ namespace alexroman.cv.api
             {
                 app.UseCors(_allowSpecificOrigins);
             }
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("/health");
+            });
 
             app.UseJsonRpc();
         }

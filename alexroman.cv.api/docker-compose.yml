@@ -5,4 +5,4 @@ services:
     image: ${DOCKER_REGISTRY-}alexromancv
     build:
       context: .
-      dockerfile: alexroman.cv.api/Dockerfile
+      dockerfile: Dockerfile

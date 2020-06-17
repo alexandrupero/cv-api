@@ -1,9 +1,9 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alexroman.cv.api", "alexroman.cv.api\alexroman.cv.api.csproj", "{015F9AF0-3E48-46ED-8600-EC8BBE66BED7}"
-EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{611646CD-1C2F-4E17-B373-69B2A29DBC00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alexroman.cv.api", "alexroman.cv.api.csproj", "{BF1CFACA-19CE-4E7B-9D10-E93540843FEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{015F9AF0-3E48-46ED-8600-EC8BBE66BED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{015F9AF0-3E48-46ED-8600-EC8BBE66BED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{015F9AF0-3E48-46ED-8600-EC8BBE66BED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{015F9AF0-3E48-46ED-8600-EC8BBE66BED7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{611646CD-1C2F-4E17-B373-69B2A29DBC00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{611646CD-1C2F-4E17-B373-69B2A29DBC00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{611646CD-1C2F-4E17-B373-69B2A29DBC00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{611646CD-1C2F-4E17-B373-69B2A29DBC00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF1CFACA-19CE-4E7B-9D10-E93540843FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF1CFACA-19CE-4E7B-9D10-E93540843FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF1CFACA-19CE-4E7B-9D10-E93540843FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF1CFACA-19CE-4E7B-9D10-E93540843FEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
